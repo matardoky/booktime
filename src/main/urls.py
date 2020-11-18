@@ -1,5 +1,6 @@
 from django.urls import path
 from django.views.generic import TemplateView
+from . import views
 
 urlpatterns = [
     path(
@@ -12,4 +13,9 @@ urlpatterns = [
         TemplateView.as_view(template_name="home.html"),
         name = "home",
     ),
+    path(
+        "contact-us/", 
+        views.ContactFormView.as_view(),
+        name = "contact_us"
+    )
 ]
