@@ -1,5 +1,9 @@
 from django.db import models
 
+class ActiveManager(models.Manager):
+    def active(self): 
+        return self.filter(active=True)
+
 class Product(models.Model):
     name = models.CharField(max_length=32)
     description = models.TextField(blank=True)
@@ -8,6 +12,8 @@ class Product(models.Model):
     active = models.BooleanField(default=True)
     in_stock = models.BooleanField(default=True)
     date_update = models.DateTimeField(auto_now=True)
+
+    objects = ActiveManager()
 
 class ProductImage(models.Model): 
     product = models.ForeignKey(
