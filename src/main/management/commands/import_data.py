@@ -19,10 +19,12 @@ class Command(BaseCommand):
         reader = csv.DictReader(options.pop("csvfile"))
         for row in reader:
             product, created = models.Product.objects.get_or_create(
-                name=row["name"], price=row["price"]
+                name=row["name"], 
+                price=row["price"],
+                description = row["description"],
+                slug = slugify(row["name"])
             )
-            product.description = row["description"]
-            product.slug = slugify(row["name"])
+    
             for import_tag in row["tags"].split("|"):
                 tag, tag_created = models.ProductTag.objects.get_or_create(
                     name = import_tag
@@ -30,22 +32,25 @@ class Command(BaseCommand):
                 product.tags.add(tag)
                 c["tags"]+=1
                 if tag_created:
-                    c["tag_created"]+=1
-            with open(
-                os.path.join(
-                    options["image_basedir"],
-                    row["image_filename"]
-                ),
-                "rb",
-            ) as f:
-                image = models.ProductImage(
-                    product = product,
-                    image=ImageFile(
-                        f, name=["image_filename"]
+                    c["tags_created"]+=1
+
+            for import_image in row["image_filename"].splitlines():
+                with open(
+                    os.path.join(
+                        options["image_basedir"],
+                        import_image,
+                    ),
+                    "rb",
+                ) as f:
+                    image, image_created = models.ProductImage.objects.get_or_create(
+                        product = product,
+                        image=ImageFile(
+                            f, name=import_image
+                        )
                     )
-                )
-                image.save()
-                c["image"]+=1
+                    c["images"]+=1
+                    if image_created:
+                        c["images_created"]+=1
 
             product.save()
             c["products"]+=1
@@ -61,7 +66,8 @@ class Command(BaseCommand):
             "Tags processed=%d (created=%d)"
             % (c["tags"], c["tags_created"])
         )
-        self.stdout.write("Image processed=%d" % c["images"])
+        self.stdout.write(
+            "Image processed=%d (created=%d)" % (c["images"], c["images_created"]))
 
                 
                 
