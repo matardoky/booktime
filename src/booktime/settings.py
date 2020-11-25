@@ -94,7 +94,6 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-IMAGE_BASEDIR = os.path.join(BASE_DIR, 'main/fixtures/product-sampleimages')
 
 LOGGING = {
     "version": 1,

@@ -1,6 +1,6 @@
 from django.urls import path
 from django.views.generic import TemplateView
-from . import views
+from . import views, models
 
 urlpatterns = [
     path(
@@ -17,5 +17,16 @@ urlpatterns = [
         "contact-us/", 
         views.ContactFormView.as_view(),
         name = "contact_us"
+    ),
+    path(
+        "products/<slug:tag>",
+        views.ProdcutListView.as_view(),
+        name = "products"
+    ),
+    path(
+        "product/<slug:slug>",
+        views.ProducDetailView.as_view(),
+        name = "product"
     )
+    
 ]
