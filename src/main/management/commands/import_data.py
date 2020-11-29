@@ -52,7 +52,6 @@ class Command(BaseCommand):
                     if image_created:
                         c["images_created"]+=1
 
-            product.save()
             c["products"]+=1
             if created:
                 c["products_created"]+=1

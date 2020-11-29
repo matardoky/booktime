@@ -1,8 +1,42 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-    <h1>here</h1>
+    <h1>product</h1>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <td>{{object.name}}</td>
+        </tr>
+
+        <tr>
+            <th>Cover images</th>
+            <td>
+                {% for image in object.productimage_set.all %}
+                    <img src="{{image.thumbnail.url}}" alt="cover">
+                {% endfor %}
+            </td>
+        </tr>
+
+        <tr>
+           <th>Price</th>
+           <td>{{ object.price }}</td>
+        </tr>
+
+        <tr>
+            <th>Description</th>
+            <td> {{ object.description|linebreaks}}</td>
+        </tr>
+
+        <tr>
+            <th>Tags</th>
+            <td> {{ object.tags.all|join:"-"|default:"No tags available"}}</td>
+        </tr>
+
+        <tr>
+            <th>In stock</th>
+            <td> {{ object.in_stock}}</td>
+        </tr>
+    </table>
     
 {% endblock content %}
     

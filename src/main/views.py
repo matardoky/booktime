@@ -28,7 +28,7 @@ class ProdcutListView(ListView):
             )
         if self.tag:
             products = models.Product.objects.active().filter(
-                tag = self.tag
+                tags = self.tag
             )
         else:
             products = models.Product.objects.active()
