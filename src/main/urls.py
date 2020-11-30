@@ -27,6 +27,11 @@ urlpatterns = [
         "product/<slug:slug>",
         views.ProducDetailView.as_view(),
         name = "product"
-    )
+    ),
+    path(
+        "signup/", 
+        views.SignupView.as_view(), 
+        name = "signup"
+    ),
     
 ]
