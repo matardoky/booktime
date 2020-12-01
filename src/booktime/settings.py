@@ -87,6 +87,8 @@ USE_TZ = True
 
 AUTH_USER_MODEL = "main.User"
 
+LOGIN_REDIRECT_URL = '/'
+
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
