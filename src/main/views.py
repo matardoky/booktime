@@ -12,7 +12,7 @@ from django.urls import reverse
 
 
 import logging
-from .forms import ContactForm, UserCreationForm
+from .forms import ContactForm, UserCreationForm, BasketLineFormSet
 from . import models
 
 logger = logging.getLogger(__name__)
@@ -152,3 +152,23 @@ def add_to_basket(request):
     return HttpResponseRedirect(
         reverse("product", args=(product.slug,))
     )
+
+def manage_basket(request):
+    if not request.basket:
+        return render(request, "basket.html", {"formset": None})
+
+    if request.method == "POST":
+        formset = BasketLineFormSet(
+            request.POST, instance=request.basket
+        )
+        if formset.is_valid():
+            formset.save()
+    else:
+        formset = BasketLineFormSet(
+            instance=request.basket
+        )
+    if request.basket.is_empty():
+        return render(request, "basket.html", {"formset": None})
+    
+    return render(request, "basket.html", {"formset":formset})
+        
