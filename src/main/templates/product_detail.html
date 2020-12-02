@@ -37,6 +37,8 @@
             <td> {{ object.in_stock}}</td>
         </tr>
     </table>
+
+    <a href="{% url "add_to_basket" %}?product_id={{object.id}}">Add to Basket</a>
     
 {% endblock content %}
     
