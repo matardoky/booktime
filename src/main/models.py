@@ -142,3 +142,58 @@ class BasketLine(models.Model):
     quantity = models.PositiveIntegerField(
         default=1, validators=[MinValueValidator(1)]
     )
+
+class Order(models.Model):
+    NEW = 10
+    PAID = 20
+    DONE = 30
+    STATUS = (
+        (NEW,"NEW"),
+        (PAID, "PAID"),
+        (DONE, "DONE")
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(choices=STATUS, default=NEW, max_length=4)
+    billing_name = models.CharField(max_length=60)
+    billing_address1 = models.CharField(max_length=60)
+    billing_address2 = models.CharField(
+        max_length=60, 
+        blank=True
+    )
+    billing_zip_code = models.CharField(max_length=12)
+    billing_city = models.CharField(max_length=60)
+    billing_country = models.CharField(max_length=3)
+
+    shipping_name = models.CharField(max_length=60)
+    shipping_address1 = models.CharField(max_length=60)
+    shipping_address2 = models.CharField(
+        max_length=60, 
+        blank=True
+    )
+    shipping_zip_code = models.CharField(max_length=12)
+    shipping_city = models.CharField(max_length=60)
+    shipping_country = models.CharField(max_length=3)
+
+    date_update = models.DateTimeField(auto_now=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+class OrderLine(models.Model):
+    NEW = 10
+    PROCESSING = 20
+    SENT = 30
+    CANCELLED = 40
+    STATUSES = (
+        (NEW, "NEW"),
+        (PROCESSING, "PROCESSING"),
+        (SENT, "SENT"),
+        (CANCELLED, "CANCELLED")
+    )
+    order = models.ForeignKey(
+        Order, on_delete = models.CASCADE, related_name="lines"
+    )
+    product = models.ForeignKey(
+        Product, 
+        on_delete = models.PROTECT
+    )
+    status = models.IntegerField(choices=STATUSES, default=NEW)
+
