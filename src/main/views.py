@@ -12,7 +12,7 @@ from django.urls import reverse
 
 
 import logging
-from .forms import ContactForm, UserCreationForm, BasketLineFormSet
+from .forms import ContactForm, UserCreationForm, BasketLineFormSet, AddressSelectionForm
 from . import models
 
 logger = logging.getLogger(__name__)
@@ -118,7 +118,7 @@ class AddressUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("address_list")
 
     def get_queryset(self):
-        return self.model.objects.filter(user=self.request.user)
+        return self.modebasket/l.objects.filter(user=self.request.user)
 
 class AddressDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Address
@@ -172,3 +172,22 @@ def manage_basket(request):
     
     return render(request, "basket.html", {"formset":formset})
         
+
+class AddressSelectionView(LoginRequiredMixin, FormView):
+    template_name = "address_select.html"
+    form_class = AddressSelectionForm
+    success_url = reverse_lazy("checkout_done")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        del self.request.session['basket_id']
+        basket = self.request.basket
+        basket.create_order(
+            form.cleaned_data['billing_address'],
+            form.cleaned_data['shipping_address']
+        )
+        return super().form_valid(form)
