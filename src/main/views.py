@@ -10,9 +10,13 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-
 import logging
-from .forms import ContactForm, UserCreationForm, BasketLineFormSet, AddressSelectionForm
+from .forms import (
+    ContactForm, 
+    UserCreationForm, 
+    BasketLineFormSet, 
+    AddressSelectionForm,
+)
 from . import models
 
 logger = logging.getLogger(__name__)
