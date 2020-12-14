@@ -99,7 +99,7 @@ class OrderLineInline(admin.TabularInline):
     model = models.OrderLine
     raw_id_fields = ("product",)
 
-@admin.register(models.OrderLine)
+@admin.register(models.Order)
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ("id", "user", "status")
