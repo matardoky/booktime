@@ -7,6 +7,14 @@ name = "pypi"
 django = "==3.1"
 pillow = "*"
 selenium = "*"
+django-extensions = "*"
+pydotplus = "*"
+ipython = "*"
+werkzeug = "*"
+pyparsing = "*"
+pydot = "*"
+pygraphviz = "*"
+django-webpack-loader = "*"
 
 [dev-packages]
 
