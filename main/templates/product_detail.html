@@ -55,9 +55,10 @@
                 
                 {% endfor %}
             ]
-            ReactDOM.render(
-                e(ImageBox, {images:images, imageStart:images[0]}),
-                document.getElementById("imagebox")
+            ReactDOM.render(React.createElement(ImageBox, {
+                images:images, 
+                imageStart:images[0],
+                }), document.getElementById("imagebox")
             )
         })
     </script>
