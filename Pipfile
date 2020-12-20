@@ -15,6 +15,8 @@ pyparsing = "*"
 pydot = "*"
 pygraphviz = "*"
 django-webpack-loader = "*"
+django-tables2 = "*"
+django-filter = "*"
 
 [dev-packages]
 

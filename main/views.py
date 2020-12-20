@@ -5,10 +5,20 @@ from django.views.generic.edit import DeleteView, CreateView, FormView, UpdateVi
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    UserPassesTestMixin
+)
+from django import forms as django_forms
+from django.db import models as django_models
+import django_filters
+from django_filters.views import FilterView
+
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+
+
 
 import logging
 from .forms import (
@@ -195,3 +205,31 @@ class AddressSelectionView(LoginRequiredMixin, FormView):
             form.cleaned_data['shipping_address']
         )
         return super().form_valid(form)
+
+class DateInput(django_forms.DateInput):
+    input_type = 'date'
+
+class OrderFilter(django_filters.FilterSet):
+    class Meta: 
+        model = models.Order
+        fields = {
+            'user__email' : ['icontains'],
+            'status' : ['exact'],
+            'date_updated' : ['gt', 'lt'],
+            'date_added' : ['gt', 'lt']
+        }
+        filter_overrides = {
+            django_models.DateTimeField: {
+                'filter_class' : django_filters.DateFilter,
+                'extra' : lambda f : {
+                    'widget' : 'DateInput'
+                }
+            }
+        }
+
+class OrderView(UserPassesTestMixin, FilterView):
+    filterset_class = OrderFilter
+    login_url = reverse_lazy("login")
+
+    def test_func(self):
+        return self.request.user.is_staff is True

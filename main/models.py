@@ -226,7 +226,7 @@ class Order(models.Model):
     shipping_city = models.CharField(max_length=60)
     shipping_country = models.CharField(max_length=3)
 
-    date_update = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
 class OrderLine(models.Model):

@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "django_extensions",
     "webpack_loader",
+    'django_tables2',
 
     'main.apps.MainConfig',
 ]
@@ -27,6 +28,8 @@ WEBPACK_LOADER = {
         'LOADER_CLASS': 'main.webpack.CustomWebpackLoader',
     }
 }
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,6 +139,8 @@ LOGGING = {
         },
     },
 }
+
+DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap.html'
 
 
 if not DEBUG: 
