@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "webpack_loader",
     'django_tables2',
+    'django_filters',
 
     'main.apps.MainConfig',
 ]
@@ -140,7 +141,7 @@ LOGGING = {
     },
 }
 
-DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap.html'
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"
 
 
 if not DEBUG: 
