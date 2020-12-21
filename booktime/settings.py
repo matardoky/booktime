@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "webpack_loader",
     'django_tables2',
     'django_filters',
+    'widget_tweaks',
 
     'main.apps.MainConfig',
 ]
@@ -29,8 +30,6 @@ WEBPACK_LOADER = {
         'LOADER_CLASS': 'main.webpack.CustomWebpackLoader',
     }
 }
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,15 +63,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'booktime.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -88,8 +84,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
 
 LANGUAGE_CODE = 'en-us'
 

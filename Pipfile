@@ -17,6 +17,8 @@ pygraphviz = "*"
 django-webpack-loader = "*"
 django-tables2 = "*"
 django-filter = "*"
+django-widget-tweaks = "*"
+factory-boy = "*"
 
 [dev-packages]
 
