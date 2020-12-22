@@ -1,7 +1,13 @@
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 from . import views, models, forms
+from main import endpoints
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'orderlines', endpoints.PaidOrderLineViewSet)
+router.register(r'orders', endpoints.PaidOrderViewSet)
 
 urlpatterns = [
     path(
@@ -87,7 +93,11 @@ urlpatterns = [
         "order-dashboard/",
         views.OrderView.as_view(),
         name = "order_dashboard"
-    )
+    ),
+    path(
+        "api/",
+        include(router.urls)  
+    ),
 
     
 ]

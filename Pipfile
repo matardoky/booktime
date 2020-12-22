@@ -19,6 +19,7 @@ django-tables2 = "*"
 django-filter = "*"
 django-widget-tweaks = "*"
 factory-boy = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
