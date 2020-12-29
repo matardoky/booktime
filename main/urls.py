@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
-from . import views, models, forms
+from . import views, models, forms, admin
 from main import endpoints
 from rest_framework import routers
 
@@ -98,6 +98,9 @@ urlpatterns = [
         "api/",
         include(router.urls)  
     ),
+    path('admin/', admin.main_admin.urls),
+    path("office-admin", admin.central_office_admin.urls),
+    path("dispatch-admin", admin.dispatchers_admin.urls),
 
     
 ]

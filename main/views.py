@@ -132,7 +132,7 @@ class AddressUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("address_list")
 
     def get_queryset(self):
-        return self.modebasket/l.objects.filter(user=self.request.user)
+        return self.model.objects.filter(user=self.request.user)
 
 class AddressDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Address
