@@ -20,6 +20,10 @@ django-filter = "*"
 django-widget-tweaks = "*"
 factory-boy = "*"
 djangorestframework = "*"
+channels = "*"
+channels-redis = "*"
+weasyprint = "*"
+aioredis = "*"
 
 [dev-packages]
 

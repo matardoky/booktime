@@ -89,6 +89,22 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
     objects = UserManager()
 
+    @property
+    def is_employee(self):
+        return self.is_active and (
+            self.is_superuser
+            or self.is_staff
+            and self.groups.filter(name="Employees").exists()
+        )
+
+    @property
+    def is_dispatcher(self):
+        return self.is_active and (
+            self.is_superuser
+            or self.is_staff
+            and self.groups.filter(name="Dispatchers").exists()
+        )   
+
 class Address(models.Model):
     SUPPORTED_COUNTRIES = (
         ("uk", "United Kingdom"),
@@ -228,6 +244,12 @@ class Order(models.Model):
 
     date_updated = models.DateTimeField(auto_now=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    last_spoken_to = models.ForeignKey(
+        User,
+        null=True,
+        related_name="cs_chats",
+        on_delete=models.SET_NULL,
+    )
 
 class OrderLine(models.Model):
     NEW = 10
