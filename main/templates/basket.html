@@ -22,7 +22,9 @@
                 <a href="{% url "address_select" %}" class="btn btn-primary">Place order</a>
             
             {% else %}
-                <a href="{% url "signup" %}?next={% url "address_select" %}" class="btn btn-primary">Login</a>
+                <a href="{% url "signup" %}?next={% url "address_select" %}" class="btn btn-primary">Signup</a>
+                <a href="{% url "login" %}?next={% url "address_select" %}" class="btn btn-primary">login</a>
+
                 
             {% endif %}
                 
