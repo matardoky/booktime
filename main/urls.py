@@ -102,7 +102,7 @@ urlpatterns = [
     path("office-admin", admin.central_office_admin.urls),
     path("dispatch-admin", admin.dispatchers_admin.urls),
     path(
-        "custom-service/<int:order_id>/",
+        "customer-service/<int:order_id>/",
         views.room,
         name="cs_chat"
     ),

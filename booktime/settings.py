@@ -64,7 +64,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'booktime.wsgi.application'
-ASGI_APPLICATION = 'booktime.routing.application'
+ASGI_APPLICATION = 'booktime.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
