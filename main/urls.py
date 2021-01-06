@@ -110,7 +110,7 @@ urlpatterns = [
         "customer-service/",
         TemplateView.as_view(template_name="custom_service.html"),
         name="cs_main"
-    )
+    ),
 
     
 ]
