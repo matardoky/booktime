@@ -1,6 +1,9 @@
 from channels.routing import ProtocolTypeRouter, URLRouter
-import main.routing
 from channels.auth import AuthMiddlewareStack
+from channels.http import AsgiHandler
+
+from django.urls import re_path
+import main.routing
  
 
 application = ProtocolTypeRouter({
@@ -8,5 +11,8 @@ application = ProtocolTypeRouter({
         URLRouter(
             main.routing.websocket_urlpatterns
         )
+    ),
+    'http': URLRouter(
+        main.routing.http_urlpatterns + [re_path(r"", AsgiHandler)]
     ),
 })

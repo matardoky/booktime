@@ -105,6 +105,11 @@ urlpatterns = [
         "custom-service/<int:order_id>/",
         views.room,
         name="cs_chat"
+    ),
+    path(
+        "customer-service/",
+        TemplateView.as_view(template_name="custom_service.html"),
+        name="cs_main"
     )
 
     
