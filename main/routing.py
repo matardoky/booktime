@@ -18,4 +18,10 @@ http_urlpatterns = [
             consumers.ChatNotifyConsumer.as_asgi()
         )
     ),
+    path(
+        "mobile-api/my-orders/<int:order_id>/tracker/",
+        AuthMiddlewareStack(
+            consumers.OrderTrackerConsumer.as_asgi()
+        )
+    ),
 ]

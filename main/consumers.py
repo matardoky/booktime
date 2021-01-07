@@ -11,6 +11,7 @@ from channels.generic.http import AsyncHttpConsumer
 
 import asyncio
 import json
+import aiohttp
 
 from . import models
 
@@ -205,3 +206,37 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     async def chat_leave(self, event):
         await self.send_json(event)
+
+
+class OrderTrackerConsumer(AsyncHttpConsumer):
+    def verify_user(self, user, order_id):
+        order = get_object_or_404(models.Order, pk=order_id)
+        return order.user == user
+    
+    async def query_remote_server(self, order_id):
+        async with aiohttp.ClientSession() as session:
+            async with session.get("https://pastebin.com/raw/S8LYZ65S") as resp:
+                return await resp.read()
+
+    async def handle(self, body):
+        self.order_id = self.scope["url_route"]["kwargs"]["order_id"]
+        is_authorized = await database_sync_to_async(
+            self.verify_user
+        )(self.scope["user"], self.order_id)
+
+        if is_authorized:
+            logger.info(
+                "Order tracking request for user %s and order %s",
+                self.scope.get("user"),
+                self.order_id
+            )
+            payload = await self.query_remote_server(self.order_id)
+            logger.info(
+                "Order tracking response %s for user %s and order %s",
+                payload,
+                self.scope.get("user"),
+                self.order_id
+            )
+            await self.send_response(200, payload)
+        else:
+            raise StopConsumer("unauthorized")

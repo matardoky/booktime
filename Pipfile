@@ -24,6 +24,7 @@ channels = "*"
 channels-redis = "*"
 weasyprint = "*"
 aioredis = "*"
+aiohttp = "*"
 
 [dev-packages]
 

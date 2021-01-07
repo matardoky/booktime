@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 from . import views, models, forms, admin
 from main import endpoints
 from rest_framework import routers
+from rest_framework.authtoken import views as authtoken_views
 
 router = routers.DefaultRouter()
 router.register(r'orderlines', endpoints.PaidOrderLineViewSet)
@@ -111,6 +112,16 @@ urlpatterns = [
         TemplateView.as_view(template_name="custom_service.html"),
         name="cs_main"
     ),
+    path(
+        "mobile-api/auth/",
+        authtoken_views.obtain_auth_token,
+        name="mobile_token"
+    ),
+    path(
+        "mobile-api/my-order",
+        endpoints.my_order,
+        name="mobile_my_order"
+    )
 
     
 ]
