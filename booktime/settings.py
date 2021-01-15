@@ -82,6 +82,8 @@ TEMPLATES = [
 
 
 REDIS_URL = env('REDIS_URL')
+DATABASE_URL = env('DATABASE_URL')
+
 
 CHANNEL_LAYERS = {
     'default': {
@@ -101,15 +103,8 @@ if DEBUG:
 }
 else:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': '',
-            'USER': '',
-            'PASSWORD': '',
-            'HOST': 'localhost',
-            'PORT': '',
-        }
-   }
+        'default': env.db(DATABASE_URL)
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
