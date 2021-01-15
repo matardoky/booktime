@@ -1,1 +1,1 @@
-web: daphne booktime.asgi:application
+web: daphne booktime.asgi:application -p $PORT --bind 0.0.0.0 -v2 

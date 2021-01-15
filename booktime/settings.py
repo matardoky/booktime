@@ -99,7 +99,7 @@ if DEBUG:
     }
 }
 else:
-    DATABASES = {'default': env.db("DATABASE_URL")}
+    DATABASES = {'default': env.db()}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
