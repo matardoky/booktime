@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(
 )
 
 env = environ.Env(
-    DEBUG=(bool, True)
+    DEBUG=(bool, False)
 )
 
 SECRET_KEY = env('SECRET_KEY')
