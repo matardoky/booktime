@@ -101,8 +101,15 @@ if DEBUG:
 }
 else:
     DATABASES = {
-        'default': env.db()
-    }
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': '',
+            'USER': '',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+   }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
