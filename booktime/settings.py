@@ -5,8 +5,10 @@ BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))
 )
 
-env = environ.Env()
-env.read_env()
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+env.read_env('.env')
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
