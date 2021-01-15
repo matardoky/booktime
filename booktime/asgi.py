@@ -5,6 +5,9 @@ from django.core.asgi import get_asgi_application
 from django.urls import re_path, path
 import main.routing
 from .auth import TokenGetAuthMiddlewareStack
+import os
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "booktime.settings")
  
 application = ProtocolTypeRouter({
     "websocket": TokenGetAuthMiddlewareStack(
