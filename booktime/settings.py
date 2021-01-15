@@ -5,12 +5,11 @@ BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))
 )
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+env = environ.Env()
+environ.Env.read_env()
 
+DEBUG = env.bool('DEBUG', default=False)
 SECRET_KEY = env('SECRET_KEY')
-DEBUG = env('DEBUG')
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -92,7 +91,7 @@ CHANNEL_LAYERS = {
     }
 }
 
-if not DEBUG:
+if DEBUG:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
