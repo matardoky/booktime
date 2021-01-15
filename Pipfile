@@ -26,6 +26,7 @@ aioredis = "*"
 aiohttp = "*"
 whitenoise = "*"
 django-environ = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
