@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(
 env = environ.Env(
     DEBUG=(bool, False)
 )
-env.read_env('.env')
+env.read_env()
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
@@ -82,7 +82,6 @@ TEMPLATES = [
 
 
 REDIS_URL = env('REDIS_URL')
-DATABASE_URL = env('DATABASE_URL')
 
 
 CHANNEL_LAYERS = {
@@ -102,9 +101,7 @@ if DEBUG:
     }
 }
 else:
-    DATABASES = {
-        'default': env.db(DATABASE_URL)
-    }
+    DATABASES = {'default': env.db('DATABASE_URL')}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
