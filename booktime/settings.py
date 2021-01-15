@@ -11,10 +11,10 @@ env = environ.Env()
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 
-if DEBUG:
-    ALLOWED_HOSTS = ['*']
-else:
-    ALLOWED_HOSTS = ['booktime.zendoc', 'localhost']
+# if DEBUG:
+#     ALLOWED_HOSTS = ['*']
+# else:
+ALLOWED_HOSTS = ['booktime.zendoc', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -91,15 +91,15 @@ CHANNEL_LAYERS = {
     }
 }
 
-if DEBUG:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-else:
-    DATABASES = {'default': env.db()}
+# if DEBUG:
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+# else:
+DATABASES = {'default': env.db()}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -182,11 +182,8 @@ LOGGING = {
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"
 
-
-if not DEBUG: 
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
    
-
 EMAIL_CONFIG = env.email_url('EMAIL_URL')
 vars().update(EMAIL_CONFIG)
 
