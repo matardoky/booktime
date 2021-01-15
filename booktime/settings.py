@@ -8,7 +8,6 @@ BASE_DIR = os.path.dirname(
 env = environ.Env(
     DEBUG=(bool, True)
 )
-env.read_env('.env')
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
