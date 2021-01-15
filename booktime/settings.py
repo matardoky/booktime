@@ -91,7 +91,7 @@ CHANNEL_LAYERS = {
     }
 }
 
-""" if DEBUG:
+if DEBUG:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -99,12 +99,7 @@ CHANNEL_LAYERS = {
     }
 }
 else:
-    DATABASES = {'default': env.db("DATABASE_URL")} """
-
-if 'DATABASE_URL' in env:
-    DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
-    DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
-    DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60) 
+    DATABASES = {'default': env.db("DATABASE_URL")}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
