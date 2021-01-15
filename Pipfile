@@ -27,6 +27,7 @@ aiohttp = "*"
 whitenoise = "*"
 django-environ = "*"
 psycopg2-binary = "*"
+daphne = "*"
 
 [dev-packages]
 

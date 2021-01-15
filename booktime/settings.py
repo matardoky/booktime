@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(
 )
 
 env = environ.Env(
-    DEBUG=(bool, False)
+    DEBUG=(bool, True)
 )
 env.read_env('.env')
 
