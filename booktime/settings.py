@@ -6,10 +6,7 @@ BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))
 )
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
-env.read_env('.env')
+env = environ.Env()
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
@@ -102,7 +99,7 @@ if DEBUG:
     }
 }
 else:
-    DATABASES = {'default': env.db()}
+    DATABASES = {'default': env.db("DATABASE_URL")}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
