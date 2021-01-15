@@ -8,16 +8,15 @@ from .auth import TokenGetAuthMiddlewareStack
 import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "booktime.settings")
-django.setup()
- 
+
 application = ProtocolTypeRouter({
+    "http": URLRouter(
+        main.routing.http_urlpatterns + [re_path("", get_asgi_application())]
+    ),
     "websocket": TokenGetAuthMiddlewareStack(
         URLRouter(
             main.routing.websocket_urlpatterns
         )
     ),
-    "http": URLRouter(
-        main.routing.http_urlpatterns + [re_path("", get_asgi_application())]
-    )
     
 })
