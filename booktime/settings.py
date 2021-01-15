@@ -93,7 +93,7 @@ CHANNEL_LAYERS = {
     }
 }
 
-if DEBUG:
+if not DEBUG:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
