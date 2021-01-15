@@ -188,9 +188,7 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"
 
 if not DEBUG: 
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
+   
 
 EMAIL_CONFIG = env.email_url('EMAIL_URL')
 vars().update(EMAIL_CONFIG)
