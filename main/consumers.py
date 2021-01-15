@@ -13,6 +13,8 @@ import asyncio
 import json
 import aiohttp
 
+from django.conf import settings
+
 from . import models
 
 logger = logging.getLogger(__name__)
@@ -53,7 +55,7 @@ class ChatNotifyConsumer(AsyncHttpConsumer):
             raise StopConsumer("Unauthorized")
 
     async def stream(self):
-        r_conn = await aioredis.create_redis("redis://localhost")
+        r_conn = await aioredis.create_redis(settings.REDIS_URL)
         while self.is_streaming:
             active_chats = await r_conn.keys(
                 "customer-service_*"
@@ -147,7 +149,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         
         if authorized:
             self.r_conn = await aioredis.create_redis(
-                "redis://localhost"
+                settings.REDIS_URL
             )
             await self.channel_layer.group_add(
                 self.room_group_name, self.channel_name

@@ -6,7 +6,7 @@ class TokenGetAuthMiddleware:
     def __init__(self, inner):
         self.inner = inner
 
-    def __call__(self, scope):
+    async  def __call__(self, scope, receive, send):
         params = parse_qs(scope["query_string"])
         if b"token" in params:
             try:
@@ -15,7 +15,7 @@ class TokenGetAuthMiddleware:
                 scope["user"] = token.user
             except Token.DoesNotExist:
                 pass
-        return self.inner(scope)
+        return await self.inner(scope, receive, send)
 
 TokenGetAuthMiddlewareStack = lambda inner: TokenGetAuthMiddleware(
     AuthMiddlewareStack(inner)

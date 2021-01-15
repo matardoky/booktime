@@ -25,6 +25,8 @@ channels-redis = "*"
 weasyprint = "*"
 aioredis = "*"
 aiohttp = "*"
+whitenoise = "*"
+django-environ = "*"
 
 [dev-packages]
 

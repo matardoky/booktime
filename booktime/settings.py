@@ -1,9 +1,18 @@
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import environ
 
-SECRET_KEY = 'am4(w=)ah89_z(-6o&(ulu8w4x=-4=yqm75^vqh9vpw&ge6-pw'
+BASE_DIR = os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))
+)
 
-DEBUG = True
+env = environ.Env(
+    DEBUG=(bool, True)
+)
+env.read_env('.env')
+
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -24,6 +33,9 @@ INSTALLED_APPS = [
 
     'main.apps.MainConfig',
     'channels',
+
+    'whitenoise.runserver_nostatic',
+
 ]
 
 WEBPACK_LOADER = {
@@ -44,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'main.middlewares.basket_middleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'booktime.urls'
@@ -67,21 +80,28 @@ TEMPLATES = [
 WSGI_APPLICATION = 'booktime.wsgi.application'
 ASGI_APPLICATION = 'booktime.asgi.application'
 
+REDIS_URL = env('REDIS_URL')
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts":[('127.0.0.1', 6379)],
+            "hosts":{"hosts": [REDIS_URL],}
         },
     }
 }
 
-DATABASES = {
+if DEBUG:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+else:
+    DATABASES = {
+        'default': env.db()
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -113,11 +133,8 @@ AUTH_USER_MODEL = "main.User"
 LOGIN_REDIRECT_URL = '/'
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
@@ -168,14 +185,8 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"
 
 
 if not DEBUG: 
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST_USER = "username"
-    EMAIL_HOST = "stpm.domain.com"
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_PASSWORD = "password"
-else: 
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
+EMAIL_CONFIG = env.email_url('EMAIL_URL')
+vars().update(EMAIL_CONFIG)
 
