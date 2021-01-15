@@ -5,6 +5,8 @@ from django.urls import re_path, path
 import main.routing
 from .auth import TokenGetAuthMiddlewareStack
 import os
+import django
+django.setup()
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "booktime.settings")
 
