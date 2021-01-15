@@ -5,4 +5,3 @@ webpack-stats.json
 db.sqlites3
 media/
 __pycache__/
-.env
