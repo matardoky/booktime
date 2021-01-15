@@ -62,6 +62,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'booktime.urls'
+ASGI_APPLICATION = 'booktime.asgi.application'
 
 TEMPLATES = [
     {
@@ -79,8 +80,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'booktime.wsgi.application'
-ASGI_APPLICATION = 'booktime.asgi.application'
 
 REDIS_URL = env('REDIS_URL')
 
