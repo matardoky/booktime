@@ -1,6 +1,7 @@
 import os
 import environ
-
+import django
+django.setup()
 
 BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))
@@ -91,15 +92,15 @@ CHANNEL_LAYERS = {
     }
 }
 
-if DEBUG:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-else:
-    DATABASES = {'default': env.db()}
+# if DEBUG:
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+# else:
+DATABASES = {'default': env.db()}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
