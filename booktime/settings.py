@@ -60,7 +60,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'booktime.urls'
-ASGI_APPLICATION = 'booktime.asgi.application'
+ASGI_APPLICATION = 'booktime.routing.application'
 
 TEMPLATES = [
     {
@@ -99,14 +99,9 @@ CHANNEL_LAYERS = {
 #     }
 # }
 # else:
-# DATABASES = {'default': env.db("DATABASE_URL")}
+DATABASES = {'default': env.db()}
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, 'db.sqlite3')
-    }
-}
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
