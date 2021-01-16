@@ -14,7 +14,7 @@ env.read_env('.env')
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
-ALLOWED_HOSTS = ['booktime.zendoc', 'localhost']
+ALLOWED_HOSTS = ['booktime.167.71.56.225', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
