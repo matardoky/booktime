@@ -1,5 +1,6 @@
 #!/bin/bash
 export PATH=/app/.heroku/node/bin:$PATH
 npm run build-prod
+heroku config:set DISABLE_COLLECTSTATIC=1
 ./manage.py collectstatic --noinput
 ./manage.py migrate --dry-run --noinput
