@@ -7,10 +7,11 @@ from .auth import TokenGetAuthMiddlewareStack
 import os
 
 import django
-django.setup()
-from apps.models import MyClass;
+
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "booktime.settings")
+django.setup()
+
 application = ProtocolTypeRouter({
     "http": URLRouter(
         main.routing.http_urlpatterns + [re_path("", get_asgi_application())]

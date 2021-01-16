@@ -99,7 +99,7 @@ CHANNEL_LAYERS = {
 #     }
 # }
 # else:
-DATABASES = {'default': env.db()}
+DATABASES = {'default': env.db("DATABASE_URL")}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
