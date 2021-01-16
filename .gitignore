@@ -2,9 +2,8 @@ node_modules/
 staticfiles/
 bundles/
 webpack-stats.json
-db.sqlite3
 media/
 __pycache__/
 .vscode/
-.env
+
 media/
