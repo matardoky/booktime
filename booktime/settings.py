@@ -14,7 +14,7 @@ env.read_env('.env')
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
-ALLOWED_HOSTS = ['booktime.booktime', 'localhost']
+ALLOWED_HOSTS = ['booktime-apps.herokuapp.com', 'localhost']
 
 
 INSTALLED_APPS = [
