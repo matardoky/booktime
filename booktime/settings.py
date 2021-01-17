@@ -15,6 +15,8 @@ env.read_env('.env')
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 ALLOWED_HOSTS = ['booktime.booktime', 'localhost']
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main/static')]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
