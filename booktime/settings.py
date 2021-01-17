@@ -62,7 +62,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'booktime.urls'
-ASGI_APPLICATION = 'booktime.routing.application'
+ASGI_APPLICATION = 'booktime.asgi.application'
 
 TEMPLATES = [
     {
